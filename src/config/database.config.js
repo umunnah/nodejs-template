@@ -8,7 +8,7 @@ export default {
     client: env("DB_CLIENT",'postgresql'),
     connection: {
         host: env("DB_HOST",'localhost'),
-        port: env("DB_PORT",'80'),
+        port: env("DB_PORT",'3306'),
         database: env("DB_NAME",'test'),
         user: env("DB_USER",'root'),
         password: env("DB_PASS",'root'),

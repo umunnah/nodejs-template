@@ -4,11 +4,10 @@ import {
 	ValidationException,
 } from "../../app/exceptions";
 
-import { ModelNotFoundException } from "../libraries/Repository/exceptions";
+import { ModelNotFoundException } from "../Repository/exceptions";
 
 const errorHandler = (error, req, res, next) => {
-	let error = { ...error };
-	error.message = err.message;
+	error.message = error.message;
 	if (
 		error instanceof NotFoundException ||
 		error instanceof ModelNotFoundException

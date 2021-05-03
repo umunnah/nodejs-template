@@ -1,5 +1,5 @@
 import { Router as ExpressRouter } from "express"
-import * as Controllers            from "./../../../app/controllers"
+import * as Controllers            from "../../app/controllers"
 
 class Router {
     constructor() {

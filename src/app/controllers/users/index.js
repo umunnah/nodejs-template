@@ -8,7 +8,7 @@ export default class UserController extends Controller {
 
     async index(req, res) {
         const users = await UserRepository.setTransformer(UserTransformer).paginate(PAGINATE_MD, req.query.page)
-
+        // let users = "me";
         return this.sendResponse(res, users)
     }
 

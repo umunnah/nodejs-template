@@ -3,7 +3,7 @@ import {
     FormValidations,
 }                       from "../app/middlewares"
 import UsersValidations from "./../app/validations/users.validations"
-import Router           from "./../libraries/controller/router"
+import Router           from "../libraries/router"
 
 Router.get("/", "UsersController@index")
 Router.get("/:userId", "UsersController@show")

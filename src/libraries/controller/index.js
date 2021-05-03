@@ -1,6 +1,6 @@
 import Response from "./Response"
 
-// @Response
+@Response
 export default class Controller {
     
 }

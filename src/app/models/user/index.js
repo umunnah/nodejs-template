@@ -4,9 +4,9 @@ import Authenticatable from "../../../libraries/Repository/model/plugins/Authent
 import Password        from "../../../libraries/Repository/model/plugins/Password"
 import UserAccessors   from "./Accessors"
 
-// @UserAccessors
-// @Password
-// @Authenticatable
+@UserAccessors
+@Password
+@Authenticatable
 export default class User extends BaseModel {
     static get tableName() {
         return USERS_TABLE
