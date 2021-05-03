@@ -1,4 +1,4 @@
-import Bcrypt              from "bcrypt"
+import Bcrypt              from "bcryptjs"
 import { AuthConfig }      from "../../../../config"
 import { isBycryptedHash } from "../../../../helpers/core.helper"
 

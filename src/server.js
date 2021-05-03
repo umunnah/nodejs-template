@@ -9,7 +9,6 @@ import {
 
 (async () => {
 	const port = normalizePort(AppConfig.port);
-	app.set("port", port);
 
 	const server = createServer(app);
 	server.listen(port);

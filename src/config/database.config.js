@@ -5,13 +5,13 @@ import {
 import { MIGRATIONS_TABLE } from "./../constants/DBTables"
 
 export default {
-    client: env("DB_CLIENT"),
+    client: env("DB_CLIENT",'postgresql'),
     connection: {
-        host: env("DB_HOST"),
-        port: env("DB_PORT"),
-        database: env("DB_NAME"),
-        user: env("DB_USER"),
-        password: env("DB_PASS"),
+        host: env("DB_HOST",'localhost'),
+        port: env("DB_PORT",'80'),
+        database: env("DB_NAME",'test'),
+        user: env("DB_USER",'root'),
+        password: env("DB_PASS",'root'),
     },
     pool: {
         min: 2,

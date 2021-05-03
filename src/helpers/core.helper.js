@@ -1,12 +1,12 @@
 import { config as dotEnvConfig } from "dotenv"
-import path                       from "path"
-
-export const root_path = (directory = undefined) => path.resolve(__dirname, "../../..", directory || "")
+import path from "path"
+ 
+export const root_path = (directory = undefined) => path.resolve(path.dirname(''))
 export const client_path = (directory) => path.resolve(root_path(), "client", directory || "")
 export const server_path = (directory) => path.resolve(root_path(), "server", directory || "")
 export const src_path = (directory) => path.resolve(server_path(), "src", directory || "")
 export const app_path = (directory) => path.resolve(server_path(), "src/app", directory || "")
-dotEnvConfig({ path: root_path(".env") })
+dotEnvConfig({ path: "./.env" })
 
 export const env = (key, defaultValue) => {
     const value = process.env[key] || defaultValue
@@ -41,8 +41,9 @@ export const onServerError = (error) => {
     if (error.syscall !== "listen") {
         throw error
     }
+    const port = error.port;
 
-    const bind = typeof port === "string" ? "Pipe " + port : "Port " + port
+    const bind = (typeof port === "string") ? "Pipe " + port : "Port " + port
     switch (error.code) {
         case "EACCES":
             console.error(`${bind} requires elevated privileges`)

@@ -3,7 +3,7 @@ import Pagination      from "./helpers/Pagination"
 import RepositoryMixin from "./RepositoryMixin"
 import BaseTransformer from "./transformer"
 
-@RepositoryMixin
+// @RepositoryMixin
 export default class BaseRepository {
     constructor() {
         this._init()
