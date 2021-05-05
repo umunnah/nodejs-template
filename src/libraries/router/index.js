@@ -31,10 +31,12 @@ class Router {
         const action = actions[lastIndex]
 
         const [controllerName, methodName] = action.split("@")
+        // console.log("controller name",controllerName);
+        // console.log("method name",methodName);
         const controller = new Controllers[controllerName]
+        // console.log("controller",controller);
 
         actions[lastIndex] = typeof action === "string" ? controller[methodName].bind(controller) : action
-
         return actions
     }
 }

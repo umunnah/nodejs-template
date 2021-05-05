@@ -1,4 +1,4 @@
-import BaseTransformer from "../../../libraries/Repository/transformer"
+import BaseTransformer from "../../../libraries/transformer"
 
 class UserTransformer extends BaseTransformer {
     transform(user) {

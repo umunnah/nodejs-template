@@ -1,7 +1,7 @@
 import { isArray }     from "../../helpers/core.helper"
-import Pagination      from "./helpers/Pagination"
+import Pagination      from "../helpers/Pagination"
 import RepositoryMixin from "./RepositoryMixin"
-import BaseTransformer from "./transformer"
+import BaseTransformer from "../transformer"
 
 @RepositoryMixin
 export default class BaseRepository {

@@ -1,18 +1,20 @@
 import { USERS_TABLE } from "./../../constants/DBTables"
 
 export const up = knex => knex.schema.createTable(USERS_TABLE, table => {
-    table.increments()
-    table.string("email").unique().notNullable()
-    table.string("username").unique().notNullable()
+    table.uuid("id").unique()
+    table.string("email").unique().notNullable().index()
+    table.string("username").unique().notNullable().index()
     table.string("password").notNullable()
-    table.jsonb("full_name").nullable()
+    table.string("first_name").index()
+    table.string("last_name").index()
     table.jsonb("metadata").nullable()
-    table.string("profile_picture").nullable()
+    table.string("picture").nullable()
+    table.string("email_verfied_at")
     table.string("role")
 
-    table.integer("created_by").unsigned().nullable().index().references("id").inTable(USERS_TABLE)
-    table.integer("updated_by").unsigned().nullable().index().references("id").inTable(USERS_TABLE)
-    table.integer("deleted_by").unsigned().nullable().index().references("id").inTable(USERS_TABLE)
+    // table.integer("created_by").unsigned().nullable().index().references("id").inTable(USERS_TABLE)
+    // table.integer("updated_by").unsigned().nullable().index().references("id").inTable(USERS_TABLE)
+    // table.integer("deleted_by").unsigned().nullable().index().references("id").inTable(USERS_TABLE)
 
     table.timestamps(true, true)
     table.timestamp("deleted_at")

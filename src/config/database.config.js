@@ -1,8 +1,8 @@
 import {
     env,
     src_path,
-}                           from "../helpers/core.helper"
-import { MIGRATIONS_TABLE } from "./../constants/DBTables"
+}                           from "../helpers/core.helper.js"
+import { MIGRATIONS_TABLE } from "./../constants/DBTables.js"
 
 export default {
     client: env("DB_CLIENT",'postgresql'),
@@ -24,4 +24,5 @@ export default {
     seeds: {
         directory: src_path("database/seeds"),
     },
+    acquireConnectionTimeout: 10000 // to timeout in 10
 }

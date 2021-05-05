@@ -1,6 +1,6 @@
 import Bcrypt              from "bcryptjs"
-import { AuthConfig }      from "../../../../config"
-import { isBycryptedHash } from "../../../../helpers/core.helper"
+import { AuthConfig }      from "../../../config"
+import { isBycryptedHash } from "../../../helpers/core.helper"
 
 export default base => class extends base {
     async $beforeInsert(context) {

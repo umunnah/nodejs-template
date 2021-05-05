@@ -1,7 +1,7 @@
 import { USERS_TABLE } from "../../../constants/DBTables"
-import BaseModel       from "../../../libraries/Repository/model"
-import Authenticatable from "../../../libraries/Repository/model/plugins/Authenticatable"
-import Password        from "../../../libraries/Repository/model/plugins/Password"
+import BaseModel       from "../../../libraries/model"
+import Authenticatable from "../../../libraries/model/plugins/Authenticatable"
+import Password        from "../../../libraries/model/plugins/Password"
 import UserAccessors   from "./Accessors"
 
 @UserAccessors

@@ -35,6 +35,7 @@ class App {
 	}
 
 	database() {
+		// initialize knex
 		const knex = Knex(DBConfig);
 		Model.knex(knex);
 	}

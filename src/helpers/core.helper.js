@@ -4,8 +4,8 @@ import path from "path"
 export const root_path = (directory = undefined) => path.resolve(path.dirname(''))
 export const client_path = (directory) => path.resolve(root_path(), "client", directory || "")
 export const server_path = (directory) => path.resolve(root_path(), "server", directory || "")
-export const src_path = (directory) => path.resolve(server_path(), "src", directory || "")
-export const app_path = (directory) => path.resolve(server_path(), "src/app", directory || "")
+export const src_path = (directory) => path.resolve(root_path(), "src", directory || "")
+export const app_path = (directory) => path.resolve(root_path(), "src/app", directory || "")
 dotEnvConfig({ path: "./.env" })
 
 export const env = (key, defaultValue) => {

@@ -1,5 +1,5 @@
 import jwt            from "jsonwebtoken"
-import { AuthConfig } from "../../../../config"
+import { AuthConfig } from "../../../config"
 
 export default base => class extends base {
     generateToken() {

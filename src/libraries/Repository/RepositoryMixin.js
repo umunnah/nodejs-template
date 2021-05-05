@@ -1,5 +1,5 @@
-import { ModelNotFoundException } from "./exceptions"
-import Pagination                 from "./helpers/Pagination"
+import { ModelNotFoundException } from "../exceptions"
+import Pagination                 from "../helpers/Pagination"
 
 export default base => class extends base {
     async create(data) {

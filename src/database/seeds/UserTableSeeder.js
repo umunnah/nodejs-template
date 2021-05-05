@@ -11,10 +11,8 @@ export const seed = async knex => {
         factory("users", 1).create({
             email: "admin@admin.com",
             username: "admin",
-            full_name: {
-                first_name: "Administrator",
-                last_name: "",
-            },
+            first_name: "Administrator",
+            last_name: "",
             role: SUPER_ADMIN,
         })
     }

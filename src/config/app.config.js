@@ -1,4 +1,4 @@
-import { env } from "./../helpers/core.helper"
+import { env } from "./../helpers/core.helper.js"
 
 export default {
     name: env("APP_NAME"),
