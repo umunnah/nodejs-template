@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "express mvc template",
   "main": "src/server.js",
+  "engines": {
+    "node": "~v16",
+    "npm": "~7.10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node src/server.js",

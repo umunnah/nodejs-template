@@ -8,7 +8,6 @@ import {
 import { ModelNotFoundException } from "../exceptions";
 
 const errorHandler = (error, req, res, next) => {
-	console.log("error", error);
 	error.message = error.message;
 	if (
 		error instanceof NotFoundException ||
