@@ -29,6 +29,8 @@ class App {
 		this.app.use(compression());
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({extended:true}));
+		this.app.use(passport.initialize());
+		this.app.use(passport.session());
 		this.app.use(logger("dev"));
 		this.app.use(cors());
 		this.app.use(methodOverride("_method"));

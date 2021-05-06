@@ -1,60 +1,61 @@
-import { ModelNotFoundException } from "../exceptions"
-import Pagination                 from "../helpers/Pagination"
+import { ModelNotFoundException } from "../exceptions";
+import Pagination from "../helpers/Pagination";
 
-export default base => class extends base {
-    async create(data) {
-        const result = await this.model.query().insert(data)
+export default (base) =>
+	class extends base {
+		async create(data) {
+			const result = await this.model.query().insert(data);
 
-        return this.parserResult(result)
-    }
+			return this.parserResult(result);
+		}
 
-    async update(data, id) {
-        await this.find(id)
+		async update(data, id) {
+			await this.find(id);
 
-        const result = await this.model.query().patchAndFetchById(id, data)
+			const result = await this.model.query().patchAndFetchById(id, data);
 
-        return this.parserResult(result)
-    }
+			return this.parserResult(result);
+		}
 
-    async delete(id) {
-        await this.find(id)
+		async delete(id) {
+			await this.find(id);
 
-        return await this.model.query().deleteById(id)
-    }
+			return await this.model.query().deleteById(id);
+		}
 
-    async find(id) {
-        const result = await this.model.query().findById(id)
+		async find(id) {
+			const result = await this.model.query().findById(id);
 
-        if (!result) {
-            throw new ModelNotFoundException(null, id)
-        }
+			if (!result) {
+				throw new ModelNotFoundException(null, id);
+			}
 
-        return this.parserResult(result)
-    }
+			return this.parserResult(result);
+		}
 
-    async findByColumn(column, value) {
-        const result = await this.model.query().where(column, value)
+		async findByColumn(column, value) {
+			const result = await this.model.query().where(column, value);
 
-        if (result.length === 0) {
-            throw new ModelNotFoundException(null, value, column)
-        }
+			if (result.length === 0) {
+				throw new ModelNotFoundException(null, value, column);
+			}
 
-        return this.parserResult(result[0])
-    }
+			return this.parserResult(result[0]);
+		}
 
-    async all() {
-        const results = await this.model.query()
+		async all() {
+			const results = await this.model.query();
 
-        return this.parserResult(results)
-    }
+			return this.parserResult(results);
+		}
 
-    async paginate(perPage = 10, page = 1) {
-        const results = await this.model.query().page(page - 1, perPage)
+		async paginate(perPage = 10, page = 1) {
+			const results = await this.model.query().page(page - 1, perPage);
 
-        return this.parserResult(new Pagination(results, perPage, page))
-    }
+			return this.parserResult(new Pagination(results, perPage, page));
+		}
 
-    query() {
-        return this.model.query()
-    }
-}
+		query() {
+			return this.model.query();
+		}
+	};
