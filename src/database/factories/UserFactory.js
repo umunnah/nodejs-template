@@ -8,5 +8,6 @@ factory.define("users", UserModel, faker => ({
     password: "secret",
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
+    email_verfied_at: faker.timestamp.emailVerifiedAt(),
     role: faker.random.arrayElement(ROLES),
 }))
