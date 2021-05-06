@@ -1,7 +1,8 @@
 import { USERS_TABLE } from "./../../constants/DBTables"
 
-export const up = knex => knex.schema.createTable(USERS_TABLE, table => {
-    table.uuid("id").unique()
+export const up = knex => knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
+    .createTable(USERS_TABLE, table => {
+    table.uuid("id").primary().defaultTo(knex.raw('uuid_generate_v4()')).index()
     table.string("email").unique().notNullable().index()
     table.string("username").unique().notNullable().index()
     table.string("password").notNullable()
@@ -9,7 +10,7 @@ export const up = knex => knex.schema.createTable(USERS_TABLE, table => {
     table.string("last_name").index()
     table.jsonb("metadata").nullable()
     table.string("picture").nullable()
-    table.string("email_verfied_at")
+    table.timestamp("email_verfied_at").notNullable()
     table.string("role")
 
     // table.integer("created_by").unsigned().nullable().index().references("id").inTable(USERS_TABLE)

@@ -2,11 +2,13 @@ import {
 	NotFoundException,
 	UnAuthorizedException,
 	ValidationException,
+	HTTP_INTERNAL_SERVER_ERROR,
 } from "../../app/exceptions";
 
 import { ModelNotFoundException } from "../exceptions";
 
 const errorHandler = (error, req, res, next) => {
+	console.log("error", error);
 	error.message = error.message;
 	if (
 		error instanceof NotFoundException ||
@@ -35,10 +37,9 @@ const errorHandler = (error, req, res, next) => {
 
 		return;
 	}
-
 	res.status(error.status || HTTP_INTERNAL_SERVER_ERROR).json({
-		message: this.appDebug ? error.message : "Server error.",
-		errors: this.appDebug ? error : null,
+		message: error.message,
+		errors: error,
 	});
 };
 

@@ -1,82 +1,107 @@
-import { check }          from "express-validator"
-import { UserRepository } from "../repositories"
+import { check } from "express-validator";
+import { UserRepository } from "../repositories";
 
 export default {
-    create: [
-        check("email").
-            isString().withMessage("Email is required.").
-            normalizeEmail().isEmail().withMessage("Invalid email format").
-            custom(async email => {
-                try {
-                    await UserRepository.findByColumn("email", email)
-                } catch (e) {
-                    return true
-                }
+	create: [
+		check("email")
+			.isString()
+			.withMessage("Email is required.")
+			.normalizeEmail()
+			.isEmail()
+			.withMessage("Invalid email format")
+			.custom(async (email) => {
+				try {
+					await UserRepository.findByColumn("email", email);
+				} catch (e) {
+					return true;
+				}
 
-                throw new Error("Email already exists.")
-            }),
+				throw new Error("Email already exists.");
+			}),
 
-        check("username").
-            isString().withMessage("Username is required").
-            custom(async username => {
-                try {
-                    await UserRepository.findByColumn("username", username)
-                } catch (e) {
-                    return true
-                }
+		check("username")
+			.isString()
+			.withMessage("Username is required")
+			.custom(async (username) => {
+				try {
+					await UserRepository.findByColumn("username", username);
+				} catch (e) {
+					return true;
+				}
 
-                throw new Error("Username already exists.")
-            }),
+				throw new Error("Username already exists.");
+			}),
 
-        check("password").
-            isString().withMessage("Password is required").
-            isLength({ min: 6 }).withMessage("Password should be greater than 6 characters long."),
-    ],
+		check("first_name")
+			.isString()
+			.withMessage("First name is required"),
 
-    update: [
-        check("email").
-            isString().withMessage("Email is required.").
-            normalizeEmail().isEmail().withMessage("Invalid email format").
-            custom(async (email, { req }) => {
-                const userId = req.params.userId
+		check("last_name")
+			.isString()
+			.withMessage("Last name is required"),
+			
+		check("password")
+			.isString()
+			.withMessage("Password is required")
+			.isLength({ min: 6 })
+			.withMessage("Password should be greater than 6 characters long."),
+	],
 
-                const user = await UserRepository.query().where("email", email).where("id", "<>", userId)
+	update: [
+		check("email")
+			.isString()
+			.withMessage("Email is required.")
+			.normalizeEmail()
+			.isEmail()
+			.withMessage("Invalid email format")
+			.custom(async (email, { req }) => {
+				const userId = req.params.userId;
 
-                if (user.length === 0) {
-                    return true
-                }
+				const user = await UserRepository.query()
+					.where("email", email)
+					.where("id", "<>", userId);
 
-                throw new Error("Email already exists.")
-            }),
+				if (user.length === 0) {
+					return true;
+				}
 
-        check("username").
-            isString().withMessage("Username is required").
-            custom(async (username, { req }) => {
-                const userId = req.params.userId
+				throw new Error("Email already exists.");
+			}),
 
-                const user = await UserRepository.query().where("username", username).where("id", "<>", userId)
+		check("username")
+			.isString()
+			.withMessage("Username is required")
+			.custom(async (username, { req }) => {
+				const userId = req.params.userId;
 
-                if (user.length === 0) {
-                    return true
-                }
+				const user = await UserRepository.query()
+					.where("username", username)
+					.where("id", "<>", userId);
 
-                throw new Error("Username already exists.")
-            }),
-    ],
+				if (user.length === 0) {
+					return true;
+				}
 
-    passwordChange: [
-        check("password").
-            isString().withMessage("Password is required").
-            isLength({ min: 6 }).withMessage("Password should be greater than 6 characters long."),
+				throw new Error("Username already exists.");
+			}),
+	],
 
-        check("confirm-password").
-            isString().withMessage("Password is required").
-            custom(async (password, { req }) => {
-                if (password === req.body.password) {
-                    return true
-                }
+	passwordChange: [
+		check("password")
+			.isString()
+			.withMessage("Password is required")
+			.isLength({ min: 6 })
+			.withMessage("Password should be greater than 6 characters long."),
 
-                throw new Error("Password confirmation does not match password")
-            }),
-    ],
-}
+		check("confirm-password")
+			.isString()
+			.withMessage("Password is required")
+			.custom(async (password, { req }) => {
+				if (password === req.body.password) {
+					return true;
+				}
+
+				throw new Error("Password confirmation does not match password");
+			}),
+	],
+};

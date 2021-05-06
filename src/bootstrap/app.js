@@ -28,7 +28,7 @@ class App {
 		this.app.use(helmet());
 		this.app.use(compression());
 		this.app.use(express.json());
-		this.app.use(express.urlencoded({ extended: true }));
+		this.app.use(express.urlencoded({extended:true}));
 		this.app.use(logger("dev"));
 		this.app.use(cors());
 		this.app.use(methodOverride("_method"));

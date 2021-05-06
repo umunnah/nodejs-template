@@ -6,7 +6,8 @@ class UserTransformer extends BaseTransformer {
             id: user.id,
             email: user.email,
             username: user.username,
-            full_name: user.fullName(),
+            last_name: user.last_name,
+            first_name:user.first_name,
             role: user.role,
         }
     }
