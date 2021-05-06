@@ -6,8 +6,10 @@ import { UserTransformer } from "../../transformers";
 
 export default class UserController extends Controller {
 	async index(req, res) {
+		const paginate =
+			req.query.paginate !== undefined ? req.query.paginate : PAGINATE_MD;
 		const users = await UserRepository.setTransformer(UserTransformer).paginate(
-			PAGINATE_MD,
+			paginate,
 			req.query.page
 		);
 		return this.sendResponse(res, users);
@@ -26,7 +28,7 @@ export default class UserController extends Controller {
 	}
 
 	async create(req, res, next) {
-		try {	
+		try {
 			const user = await UserRepository.setTransformer(UserTransformer).create(
 				matchedData(req)
 			);
