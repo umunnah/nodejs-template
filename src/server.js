@@ -17,5 +17,6 @@ import {
 
 	process.on("unhandledRejection", (reason, p) => {
 		console.error("Unhandled Rejection at:", p, "reason:", reason);
+		server.close(() => process.exit(1));
 	});
 })();

@@ -1,9 +1,14 @@
-import { FormValidations } from "../app/middlewares"
-import AuthValidations     from "../app/validations/auth.validations"
-import Router              from "../libraries/router"
+import { FormValidations } from "../app/middlewares";
+import AuthValidations from "../app/validations/auth.validations";
+import Router from "../libraries/router";
+import multer from "multer";
 
-Router.post("/login", [
-    AuthValidations.login, FormValidations,
-], "AuthController@login")
+const upload = multer();
 
-export default Router.export()
+Router.post(
+	"/login",
+	[upload.array(), AuthValidations.login, FormValidations],
+	"AuthController@login"
+);
+
+export default Router.export();

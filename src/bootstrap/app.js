@@ -8,9 +8,7 @@ import logger from "morgan";
 import { Model } from "objection";
 import errorHandler from "../libraries/errorHandler";
 import passport from "passport";
-import { ExtractJwt, Strategy as JWTStrategy } from "passport-jwt";
-import LocalStrategy from "passport-local";
-import { AppConfig, AuthConfig, DBConfig } from "./../config";
+import { AppConfig, DBConfig } from "./../config";
 import routes from "./../routes";
 
 class App {
@@ -20,7 +18,6 @@ class App {
 
 		this.setup();
 		this.database();
-		// this.authentication();
 		this.routers();
 	}
 
@@ -48,33 +45,6 @@ class App {
 		this.app.use(errorHandler);
 	}
 
-	// authentication() {
-	// 	this.app.use(passport.initialize({}));
-
-	// 	const authModel = new AuthConfig.authModel();
-
-	// 	passport.use(
-	// 		"local",
-	// 		new LocalStrategy(
-	// 			{
-	// 				usernameField: AuthConfig.request.usernameField,
-	// 				passwordField: AuthConfig.request.passwordField,
-	// 			},
-	// 			authModel.authenticate
-	// 		)
-	// 	);
-
-	// 	passport.use(
-	// 		"jwt",
-	// 		new JWTStrategy(
-	// 			{
-	// 				jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-	// 				secretOrKey: AuthConfig.jwtSecret,
-	// 			},
-	// 			authModel.authenticateJwt
-	// 		)
-	// 	);
-	// }
 }
 
 export default new App().app;

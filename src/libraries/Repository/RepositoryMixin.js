@@ -24,13 +24,12 @@ export default (base) =>
 		}
 
 		async find(id) {
-			const result = await this.model.query().findById(id);
-
-			if (!result) {
+			try {
+				const result = await this.model.query().findById(id);
+				return this.parserResult(result);
+			} catch(e) {
 				throw new ModelNotFoundException(null, id);
 			}
-
-			return this.parserResult(result);
 		}
 
 		async findByColumn(column, value) {
