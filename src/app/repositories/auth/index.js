@@ -1,7 +1,7 @@
 import { UserModel } from "../../models";
 import BaseRepository from "./../../../libraries/Repository";
 
-class UserRepository extends BaseRepository {
+class AuthRepository extends BaseRepository {
 	constructor(props) {
 		super(props);
 	}
@@ -11,4 +11,4 @@ class UserRepository extends BaseRepository {
 	}
 }
 
-export default new UserRepository();
+export default new AuthRepository();

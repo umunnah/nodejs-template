@@ -2,13 +2,13 @@ import passport from "passport";
 import Controller from "../../../libraries/controller";
 import { UnAuthorizedException } from "../../exceptions";
 import { UserTransformer } from "../../transformers";
-import { UserRepository } from "../../repositories"
+import { AuthRepository } from "../../repositories"
 
 export default class AuthController extends Controller {
 	async login(req, res, next) {
 		const {username, password} = req.body;
 		try {
-			const loginUser = await UserRepository.authenticate(username,password);
+			const loginUser = await AuthRepository.authenticate(username,password);
 			return this.sendResponse(res,loginUser)
 			passport.authenticate(
 				"local",
