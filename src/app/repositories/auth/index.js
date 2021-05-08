@@ -9,6 +9,10 @@ class AuthRepository extends BaseRepository {
 	model() {
 		return UserModel;
 	}
+
+  async login(username, password) {
+    return await this.model.prototype.authenticate(username, password)
+  }
 }
 
 export default new AuthRepository();

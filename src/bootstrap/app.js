@@ -8,7 +8,7 @@ import logger from "morgan";
 import { Model } from "objection";
 import errorHandler from "../libraries/errorHandler";
 import passport from "passport";
-import { AppConfig, DBConfig } from "./../config";
+import { AppConfig, DBConfig,PassportConfig } from "./../config";
 import routes from "./../routes";
 
 class App {
@@ -18,6 +18,7 @@ class App {
 
 		this.setup();
 		this.database();
+		this.authentication();
 		this.routers();
 	}
 
@@ -26,8 +27,6 @@ class App {
 		this.app.use(compression());
 		this.app.use(express.json());
 		this.app.use(express.urlencoded({extended:true}));
-		this.app.use(passport.initialize());
-		this.app.use(passport.session());
 		this.app.use(logger("dev"));
 		this.app.use(cors());
 		this.app.use(methodOverride("_method"));
@@ -44,6 +43,11 @@ class App {
 
 		this.app.use(errorHandler);
 	}
+
+	authentication() {
+		this.app.use(passport.initialize({}))
+		PassportConfig(passport);
+}
 
 }
 

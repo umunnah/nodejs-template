@@ -2,35 +2,26 @@ import passport from "passport";
 import Controller from "../../../libraries/controller";
 import { UnAuthorizedException } from "../../exceptions";
 import { UserTransformer } from "../../transformers";
-import { AuthRepository } from "../../repositories"
+import { AuthRepository } from "../../repositories";
 
 export default class AuthController extends Controller {
 	async login(req, res, next) {
-		const {username, password} = req.body;
-		try {
-			const loginUser = await AuthRepository.authenticate(username,password);
-			return this.sendResponse(res,loginUser)
-			passport.authenticate(
-				"local",
-				{
-					session: false,
-				},
-				(err, user, message) => {
-				
-					if (!user) {
-						return next(new UnAuthorizedException(message));
-					}
-	
-					const token = user.generateToken();
-					user = UserTransformer.transform(user);
-					user.token = token;
-	
-					this.sendResponse(res, user, message);
+		passport.authenticate(
+			"local",
+			{
+				session: false,
+			},
+			(err, user, message) => {
+				if (!user) {
+					return next(new UnAuthorizedException(message));
 				}
-			)(req, res, next);
-		} catch (e) {
-			next(e);
-		}
-		
+
+				const token = user.generateToken();
+				user = UserTransformer.transform(user);
+				user.token = token;
+
+				this.sendResponse(res, user, message);
+			}
+		)(req, res, next);
 	}
 }

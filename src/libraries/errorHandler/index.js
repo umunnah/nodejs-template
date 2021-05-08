@@ -5,7 +5,7 @@ import {
 	HTTP_INTERNAL_SERVER_ERROR,
 } from "../../app/exceptions";
 
-import { ModelNotFoundException } from "../exceptions";
+import { ModelNotFoundException, UnAuthenticatedException } from "../exceptions";
 
 const errorHandler = (error, req, res, next) => {
 	error.message = error.message;
@@ -31,6 +31,14 @@ const errorHandler = (error, req, res, next) => {
 
 	if (error instanceof UnAuthorizedException) {
 		res.status(error.status || HTTP_UNAUTHORIZED).json({
+			message: error.message,
+		});
+
+		return;
+	}
+
+	if (error instanceof UnAuthenticatedException) {
+		res.status(error.status || 403).json({
 			message: error.message,
 		});
 
