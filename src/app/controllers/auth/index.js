@@ -2,7 +2,6 @@ import passport from "passport";
 import Controller from "../../../libraries/controller";
 import { UnAuthorizedException } from "../../exceptions";
 import { UserTransformer } from "../../transformers";
-import { AuthRepository } from "../../repositories";
 
 export default class AuthController extends Controller {
 	async login(req, res, next) {
