@@ -8,8 +8,9 @@ import logger from "morgan";
 import { Model } from "objection";
 import errorHandler from "../libraries/errorHandler";
 import passport from "passport";
-import { AppConfig, DBConfig,PassportConfig } from "./../config";
+import { AppConfig,PassportConfig } from "./../config";
 import routes from "./../routes";
+import DBConfig from "../../knexfile"
 
 class App {
 	constructor() {

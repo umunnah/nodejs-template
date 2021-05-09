@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/server.js",
+    "start": "SET NODE_ENV=development & babel-node src/server.js",
     "build": "babel src --out-dir build",
     "knex": "npx babel-node node_modules/knex/bin/cli.js",
     "make:migration": "npx knex migrate:make",

@@ -1,7 +1,7 @@
 import faker from "faker";
 import Knex from "knex";
 import { Model } from "objection";
-import { DBConfig } from "../../config";
+import DBConfig from "../../../knexfile";
 import { range } from "../../helpers/core.helper";
 
 export default class FakerFactory {
