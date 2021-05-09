@@ -26,8 +26,12 @@ const connections = {
 		},
 		acquireConnectionTimeout: 10000, // to timeout in 10
 	},
-	testing: {},
-
+	testing: {
+		client: "sqlite3",
+		connection: {
+			filename: "./mydb.sqlite",
+		},
+	},
 };
 
 

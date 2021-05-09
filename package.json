@@ -54,6 +54,7 @@
     "@babel/preset-env": "7.14.0",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
-    "nodemon": "1.19.4"
+    "nodemon": "1.19.4",
+    "sqlite3": "^5.0.2"
   }
 }
