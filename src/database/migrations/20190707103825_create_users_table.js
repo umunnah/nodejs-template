@@ -1,8 +1,17 @@
 import { USERS_TABLE } from "./../../constants/DBTables"
 
-export const up = knex => knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
-    .createTable(USERS_TABLE, table => {
-    table.uuid("id").primary().defaultTo(knex.raw('uuid_generate_v4()')).index()
+
+export const up = knex => {
+let uuidGenerationRaw;
+  if (knex.client.config.client === 'sqlite3') {
+      uuidGenerationRaw = `(lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))),2) || '-' || substr('89ab',abs(random()) % 4 + 1, 1) || substr(lower(hex(randomblob(2))),2) || '-' || lower(hex(randomblob(6))))`;
+  }
+  if (knex.client.config.client === 'pg') {
+     knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
+    uuidGenerationRaw = `uuid_generate_v4()`;
+  }
+  return knex.schema.createTable(USERS_TABLE, table => {
+    table.uuid("id").primary().defaultTo(knex.raw(uuidGenerationRaw)).index()
     table.string("email").unique().notNullable().index()
     table.string("username").unique().notNullable().index()
     table.string("password").notNullable()
@@ -20,5 +29,6 @@ export const up = knex => knex.schema.raw('CREATE EXTENSION IF NOT EXISTS "uuid-
     table.timestamps(true, true)
     table.timestamp("deleted_at")
 })
+}
 
 export const down = knex => knex.schema.dropTable(USERS_TABLE)
