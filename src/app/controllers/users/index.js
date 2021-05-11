@@ -3,6 +3,7 @@ import { PAGINATE_MD } from "../../../constants/Pagination";
 import Controller from "../../../libraries/controller";
 import { UserRepository } from "../../repositories";
 import { UserTransformer } from "../../transformers";
+import { HTTP_CREATED} from "../../../constants/HTTPCode"
 
 export default class UserController extends Controller {
 	async index(req, res) {
@@ -33,7 +34,7 @@ export default class UserController extends Controller {
 				matchedData(req)
 			);
 
-			this.sendResponse(res, user);
+			this.sendResponse(res, user,"User created successful",HTTP_CREATED);
 		} catch (e) {
 			next(e);
 		}

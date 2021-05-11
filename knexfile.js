@@ -28,7 +28,7 @@ const connections = {
 	},
 	testing: {
 		client: "sqlite3",
-		connection: ":memory:",
+		connection: path.resolve(path.dirname(""), "src/tests/test.db"),
     useNullAsDefault: true,
     migrations: {
 			tableName: "sys_migrations",
